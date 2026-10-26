@@ -1,0 +1,42 @@
+VERSION "ami-topolino-can-decode 0.1"
+
+NS_ :
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+
+BS_:
+
+BU_: AMI
+
+BO_ 1429 BMS_Voltages_595: 8 AMI
+ SG_ PackVoltage_A : 0|16@1+ (0.01,0) [0|655.35] "V" Vector__XXX
+ SG_ PackVoltage_B : 16|16@1+ (0.01,0) [0|655.35] "V" Vector__XXX
+ SG_ Unk_B4_SocRelated : 32|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 1408 Pack_580: 8 AMI
+ SG_ PackCurrent : 0|16@1- (0.1,0) [-3276.8|3276.7] "A" Vector__XXX
+ SG_ PackVoltage : 16|16@1+ (0.01,0) [0|655.35] "V" Vector__XXX
+ SG_ Unk_B4_TempCandidate : 32|8@1+ (1,0) [0|255] "degC" Vector__XXX
+ SG_ SOC_Candidate : 40|8@1+ (1,0) [0|100] "%" Vector__XXX
+
+BO_ 36 Cyclic_024: 8 AMI
+ SG_ PackVoltage_Int : 48|8@1+ (1,0) [0|255] "V" Vector__XXX
+
+BO_ 96 Cyclic_060: 8 AMI
+ SG_ PackVoltage_dV : 23|16@0+ (0.1,0) [0|6553.5] "V" Vector__XXX
+ SG_ RollingCounter : 40|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ Unk_B6B7_Offset7FFF : 55|16@0+ (1,-32768) [-32768|32767] "" Vector__XXX
+
+BO_ 1256 Temps_4E8: 8 AMI
+ SG_ State_B0 : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ Temp_A_Candidate : 8|8@1+ (1,0) [0|255] "degC" Vector__XXX
+ SG_ Temp_B_Candidate : 16|8@1+ (1,0) [0|255] "degC" Vector__XXX
+
+CM_ "0x710 (6 bayt), 0x711 (8 bayt), 0x712 (3 bayt): ASCII VIN parcalari, 1 Hz. Birlestirme sirasi 0x712 + 0x710 + 0x711 (3+6+8 = 17 hane).";
+CM_ BO_ 1429 "0x595, 1 Hz. B0:B1 ve B2:B3 paket gerilimi (0x580 ile r=0.99). B4 SOC ile iliskili, olcek belirsiz. B7 sabit.";
+CM_ BO_ 1408 "0x580 B6=0x13 yerlesimi. Sarj sirasinda (B6=0x6C/0x36) farkli bir yerlesim gozlendi, henuz cozulmedi.";
+CM_ BO_ 36 "0x024 B6 = paket gerilimi tam volt. Diger baytlar sabit.";
+CM_ BO_ 96 "0x060: B2:B3 gerilim (orta guven), B4 CRC benzeri, B5 sayac, B6:B7 0x7FFF merkezli.";
+CM_ BO_ 1256 "0x4E8: B1/B2 yavas degisen sicaklik adaylari. Dusuk-orta guven.";

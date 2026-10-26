@@ -1,0 +1,5 @@
+# Ham loglar araç kimliği (VIN) içerir, ASLA commit etmeyin
+Captures/
+*.jsonl
+*.zip
+__pycache__/
